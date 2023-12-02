@@ -20,17 +20,17 @@ private:
 	void erase(obj_node*);
 
 public:
-	Inventory(float);
+	Inventory(const float&);
 
 	unsigned int get_items();
 	float get_max_weight();
 	float get_summary_weignt();
 
-	void set_max_weight(float);
+	void set_max_weight(const float&);
 
 	void put(Object*);
-	void smash(unsigned int);
-	Object* remove(unsigned int);
+	void smash(const unsigned int&);
+	Object* remove(const unsigned int&);
 
 	std::vector<Object*>* get_inventory_list();
 };

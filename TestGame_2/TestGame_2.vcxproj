@@ -130,12 +130,17 @@
     <ClCompile Include="ConsoleInterface.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Perk.cpp" />
+    <ClCompile Include="Person.cpp" />
     <ClCompile Include="TestGame_2.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleInterface.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Perk.h" />
+    <ClInclude Include="Person.h" />
+    <ClInclude Include="SPECIAL.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,5 @@
 #include "Inventory.h"
+#include <iostream>
 
 void Inventory::erase(obj_node* on)
 {
@@ -7,9 +8,9 @@ void Inventory::erase(obj_node* on)
 	if (on == this->first && this->first == this->last && this->items == 1) // IF ONE OBJECT
 	{
 		this->first = this->last = NULL;
+		this->items = 0;
 		this->summary_weignt = 0;
 		delete on;
-		return;
 	}
 	
 	else if (this->first != NULL && this->last != NULL && this->first != this->last && this->items > 1) // IF MANY OBJECTS
@@ -18,27 +19,29 @@ void Inventory::erase(obj_node* on)
 		{
 			this->first = this->first->next;
 			this->summary_weignt -= on->value->get_weight();
+			this->items--;
 			delete on;
-			return;
 		}
 		else if (on == this->last) // IF TARGET OBJ IS LAST IN LIST
 		{
 			this->last = this->last->prev;
 			this->summary_weignt -= on->value->get_weight();
+			this->items--;
 			delete on;
-			return;
 		}
 		else // IF TARGET OBJ IS IN CENTER IN LIST
 		{
-			on->prev = on->next;
-			on->next = on->prev;
+			on->prev->next = on->next;
+			on->next->prev = on->prev;
+			this->summary_weignt -= on->value->get_weight();
+			this->items--;
 			delete on;
-			return;
 		}
 	}
+	return;
 }
 
-Inventory::Inventory(float mw = 60.0)
+Inventory::Inventory(const float& mw)
 {
 	this->first = NULL;
 	this->last = NULL;
@@ -61,7 +64,7 @@ float Inventory::get_summary_weignt()
 	return this->summary_weignt;
 }
 
-void Inventory::set_max_weight(float mw)
+void Inventory::set_max_weight(const float& mw)
 {
 	this->max_weight = mw;
 }
@@ -105,26 +108,32 @@ void Inventory::put(Object* o)
 	return;
 }
 
-void Inventory::smash(unsigned int n)
+void Inventory::smash(const unsigned int& n)
 {
 	if (n > this->items - 1) return;
 
 	obj_node* curr = this->first;
-
-	for (int i = 0; i < this->items; i++)
+	unsigned int i = 0;
+	while (curr != NULL)
 	{
-		if (i = n)
+		if (i == n)
 		{
+			std::cout << "i= " << i << "n= " << n << "name= " << curr->value->get_name() << " will be FUCKING SMASHED!!!!! " << std::endl;
 			this->erase(curr);
 			return;
 		}
-		curr = curr->next;
+		if (curr->next == NULL) return;
+		else
+		{
+			curr = curr->next;
+			i++;
+		}
 	}
 	delete curr;
 	return;
 }
 
-Object* Inventory::remove(unsigned int)
+Object* Inventory::remove(const unsigned int& n)
 {
 	return NULL;
 }

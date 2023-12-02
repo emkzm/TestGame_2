@@ -27,14 +27,13 @@ int main()
     for (int i = 0; i < 5; i++)
     {
         inv->put(obj[i]);
-        CI->LookInventory(inv);
-        system("pause");
-        system("cls");
     }
     
     while (true)
     {
         CI->SelectionToDeleteMenu(inv);
+        system("pause");
+        system("cls");
     }
 }
 

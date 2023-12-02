@@ -7,7 +7,7 @@ void ConsoleInterface::LookInventory(Inventory* inventory)
 	std::vector<Object*>* InventoryList = inventory->get_inventory_list();
 	for (int i = 0; i < InventoryList->size(); i++)
 	{
-		std::cout << i << ".  " << (*InventoryList)[i]->get_name() << " ADDRESS: " << &(*InventoryList)[i] << std::endl;
+		std::cout << i << ".  NAME:" << (*InventoryList)[i]->get_name() << " WEIGHT: " << (*InventoryList)[i]->get_weight() << std::endl;
 	}
 }
 void ConsoleInterface::SelectionToDeleteMenu(Inventory* inventory)
