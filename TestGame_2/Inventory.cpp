@@ -1,5 +1,4 @@
 #include "Inventory.h"
-#include <iostream>
 
 void Inventory::erase(obj_node* on)
 {
@@ -8,14 +7,13 @@ void Inventory::erase(obj_node* on)
 	if (on == this->first && this->first == this->last && this->items == 1) // IF ONE OBJECT
 	{
 		this->first = this->last = NULL;
-		this->summary_weignt -= on->value->get_weight();
+		this->summary_weignt = 0;
 		delete on;
 		return;
 	}
 	
 	else if (this->first != NULL && this->last != NULL && this->first != this->last && this->items > 1) // IF MANY OBJECTS
 	{		
-
 		if (on == this->first) // IF TARGET OBJ IS FIRST IN LIST
 		{
 			this->first = this->first->next;
@@ -79,38 +77,29 @@ void Inventory::put(Object* o)
 
 	if (this->items == 0 && this->first == NULL && this->last == NULL) // IF NO OBJECTS
 	{
-		std::cout << "NO OBJECTS" << std::endl;
 		this->first = this->last = obj;
 		this->items = 1;
 		this->summary_weignt += o->get_weight();
-		std::cout << o->get_name() << " ADDRESS:" << &o << std::endl;
-		std::cout << this->last->value->get_name() << " ADDRESS:" << &this->last->value << std::endl;
 		return;
 	}
 
 	else if ( (this->items == 1) && (this->first == this->last)) // IF 1 OBJECT 
 	{
-		std::cout << "1 OBJECT" << std::endl;
 		this->last = obj;
 		this->last->prev = this->first;
 		this->first->next = this->last;
 		this->summary_weignt += o->get_weight();
 		this->items = 2;
-		std::cout << o->get_name() << " ADDRESS:" << &o << std::endl;
-		std::cout << this->last->value->get_name() << " ADDRESS:" << &this->last->value << std::endl;
 		return;
 	}
 
 	else if ((this->items > 1) && (this->first != NULL && this->last != NULL)) // IF MANY OBJECTS 
 	{
-		std::cout << "MANY OBJECTS" << std::endl;
 		this->last->next = obj;
 		obj->prev = this->last;
 		this->last = obj;
 		this->items += 1;
 		this->summary_weignt += o->get_weight();
-		std::cout << o->get_name() << " ADDRESS:" << &o << std::endl;
-		std::cout << this->last->value->get_name() << " ADDRESS:" << &this->last->value << std::endl;
 		return;
 	}
 	return;
@@ -121,6 +110,7 @@ void Inventory::smash(unsigned int n)
 	if (n > this->items - 1) return;
 
 	obj_node* curr = this->first;
+
 	for (int i = 0; i < this->items; i++)
 	{
 		if (i = n)
@@ -146,6 +136,7 @@ std::vector<Object*>* Inventory::get_inventory_list()
 	for (int i = 0; i < this->items; i++)
 	{
 		InventoryList->push_back(curr->value);
+		curr = curr->next;
 	}
 	//delete curr;
 	return InventoryList;
