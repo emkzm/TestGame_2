@@ -11,14 +11,26 @@ class Person :
 private:
     Inventory* inventory;
     short int health;
-    SPECIAL* SPECIAL_LIST;
-    //vector<Perk*>* perks[];
-    std::string* name;
-
+    char gender;
+    //SPECIAL* SPECIAL_LIST;
+    //vector<Perk*>* perks;
+    
 public:
     Person();
-    Person(std::string*);
-    std::string get_name();
+    Person(Inventory* inventory,
+        const short int& health,
+        const char& gender,
+        const float& weight,
+        const unsigned int& rare,
+        const unsigned int& cost,
+        const std::string& name,
+        const std::string& description);
+        
 
+    Inventory* get_inventory();
+    short int get_health();
+    //SPECIAL* get_SPECIAL_LIST();
+    //vector<Perk*>* get_perks;
+    unsigned int take_to_inventory(Object*);
 };
 

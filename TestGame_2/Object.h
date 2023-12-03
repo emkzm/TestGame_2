@@ -12,7 +12,11 @@ private:
 
 public:
 	Object();
-	Object(float, unsigned int, unsigned int, std::string, std::string); // weight, rare, cost, name, description
+	Object(const float& weight,
+		const unsigned int& rare,
+		const unsigned int& cost,
+		const std::string& name,
+		const std::string& descripton);
 	
 	float get_weight();
 	unsigned int get_rare();
@@ -20,8 +24,8 @@ public:
 	std::string get_name();
 	std::string get_description();
 
-	void set_name(std::string);
-	void set_description(std::string);
+	void set_name(const std::string& name);
+	void set_description(const std::string& description);
 
 	void use();
 };

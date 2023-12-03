@@ -9,7 +9,11 @@ Object::Object()
 	this->description = "No description";
 }
 
-Object::Object(float w = 0.0, unsigned int r = 0, unsigned int c = 0, std::string n = "Unknown", std::string d = "No description")
+Object::Object(const float& w = 0.0, 
+	const unsigned int& r = 0, 
+	const unsigned int& c = 0, 
+	const std::string& n = "Unknown", 
+	const std::string& d = "No description")
 {
 	this->weight = w;
 	this->rare = r;
@@ -43,14 +47,14 @@ std::string Object::get_description()
 	return this->description;
 }
 
-void Object::set_name(std::string n)
+void Object::set_name(const std::string& name)
 {
-	this->name = n;
+	this->name = name;
 }
 
-void Object::set_description(std::string d)
+void Object::set_description(const std::string& description)
 {
-	this->description = d;
+	this->description = description;
 }
 
 void Object::use()

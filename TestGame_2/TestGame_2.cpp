@@ -5,13 +5,14 @@
 #include "Object.h"
 #include "Inventory.h"
 #include "ConsoleInterface.h"
+#include "Person.h"
 
 int main()
 {
     setlocale(0, "rus");
     ConsoleInterface* CI = new ConsoleInterface();
     
-    Object* obj[] = { 
+    /*Object* obj[] = {
         new Object(10.0, 0, 100, "Bread", ""),
         new Object(20.0, 0, 100, "Kolbasa", ""),
         new Object(15.3, 0, 100, "Sosiska", ""),
@@ -28,13 +29,22 @@ int main()
     {
         inv->put(obj[i]);
     }
-    
-    while (true)
+    */
+    Person* Player = new Person(new Inventory(60.0), 100, 'm', 75, 0, 0, "Tom", "Player");
+    Person* Friend = new Person(new Inventory(65.0), 100, 'm', 75, 0, 0, "Jim", "Friend");
+    Object* obj[] = {
+        new Object(10.0, 0, 100, "Bread", ""),
+        new Object(20.0, 0, 100, "Kolbasa", ""),
+        new Object(15.3, 0, 100, "Sosiska", ""),
+        new Object(32.14, 0, 100, "Salamy", ""),
+        new Object(24.5, 0, 100, "Alisa", "")
+    };
+    for (int i = 0; i < 5; i++)
     {
-        CI->SelectionToDeleteMenu(inv);
-        system("pause");
-        system("cls");
+        Player->take_to_inventory(obj[i]);
     }
+
+    CI->TestGameMenu_v0_1(Player, Friend);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

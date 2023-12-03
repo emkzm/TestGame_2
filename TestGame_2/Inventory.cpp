@@ -1,16 +1,15 @@
 #include "Inventory.h"
-#include <iostream>
 
-void Inventory::erase(obj_node* on)
+Object* Inventory::erase(obj_node* on)
 {
-	if (on == NULL) return;
+	if (on == NULL) return NULL;
 
 	if (on == this->first && this->first == this->last && this->items == 1) // IF ONE OBJECT
 	{
 		this->first = this->last = NULL;
 		this->items = 0;
 		this->summary_weignt = 0;
-		delete on;
+		return on->value;
 	}
 	
 	else if (this->first != NULL && this->last != NULL && this->first != this->last && this->items > 1) // IF MANY OBJECTS
@@ -20,14 +19,14 @@ void Inventory::erase(obj_node* on)
 			this->first = this->first->next;
 			this->summary_weignt -= on->value->get_weight();
 			this->items--;
-			delete on;
+			return on->value;
 		}
 		else if (on == this->last) // IF TARGET OBJ IS LAST IN LIST
 		{
 			this->last = this->last->prev;
 			this->summary_weignt -= on->value->get_weight();
 			this->items--;
-			delete on;
+			return on->value;
 		}
 		else // IF TARGET OBJ IS IN CENTER IN LIST
 		{
@@ -35,10 +34,10 @@ void Inventory::erase(obj_node* on)
 			on->next->prev = on->prev;
 			this->summary_weignt -= on->value->get_weight();
 			this->items--;
-			delete on;
+			return on->value;
 		}
 	}
-	return;
+	return NULL;
 }
 
 Inventory::Inventory(const float& mw)
@@ -108,9 +107,9 @@ void Inventory::put(Object* o)
 	return;
 }
 
-void Inventory::smash(const unsigned int& n)
+Object* Inventory::remove(const unsigned int& n)
 {
-	if (n > this->items - 1) return;
+	if (n > this->items - 1) return NULL;
 
 	obj_node* curr = this->first;
 	unsigned int i = 0;
@@ -118,23 +117,15 @@ void Inventory::smash(const unsigned int& n)
 	{
 		if (i == n)
 		{
-			std::cout << "i= " << i << "n= " << n << "name= " << curr->value->get_name() << " will be FUCKING SMASHED!!!!! " << std::endl;
-			this->erase(curr);
-			return;
+			return this->erase(curr);
 		}
-		if (curr->next == NULL) return;
+		if (curr->next == NULL) return NULL;
 		else
 		{
 			curr = curr->next;
 			i++;
 		}
 	}
-	delete curr;
-	return;
-}
-
-Object* Inventory::remove(const unsigned int& n)
-{
 	return NULL;
 }
 
