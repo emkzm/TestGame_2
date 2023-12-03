@@ -32,5 +32,6 @@ public:
     //SPECIAL* get_SPECIAL_LIST();
     //vector<Perk*>* get_perks;
     unsigned int take_to_inventory(Object*);
+    void set_health(const unsigned int& health);
 };
 

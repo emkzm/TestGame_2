@@ -36,6 +36,9 @@
     <ClCompile Include="SPECIAL.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="ScriptReaderInterface.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -56,5 +59,11 @@
     <ClInclude Include="SPECIAL.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="ScriptReaderInterface.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TestScriptFile.txt" />
   </ItemGroup>
 </Project>

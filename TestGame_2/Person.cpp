@@ -34,3 +34,8 @@ unsigned int Person::take_to_inventory(Object* obj)
 	}
 	return 0;
 }
+
+void Person::set_health(const unsigned int& health)
+{
+	this->health = health;
+}

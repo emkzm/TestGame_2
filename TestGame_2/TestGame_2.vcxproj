@@ -132,6 +132,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Perk.cpp" />
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="ScriptReaderInterface.cpp" />
     <ClCompile Include="SPECIAL.cpp" />
     <ClCompile Include="TestGame_2.cpp" />
   </ItemGroup>
@@ -141,7 +142,11 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="Perk.h" />
     <ClInclude Include="Person.h" />
+    <ClInclude Include="ScriptReaderInterface.h" />
     <ClInclude Include="SPECIAL.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TestScriptFile.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

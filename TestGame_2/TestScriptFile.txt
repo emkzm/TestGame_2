@@ -1,0 +1,4 @@
+set Player name Vasya
+set Player health 5
+get Player health
+give Player Bread

@@ -1,7 +1,8 @@
 #include "ConsoleInterface.h"
-#include <Windows.h>
+#include "ScriptReaderInterface.h"
 #include <conio.h>
 #include <fstream>
+#include <string>
 #define PAUSE system("pause");
 #define CLS system("cls");
 
@@ -49,9 +50,18 @@ void ConsoleInterface::GiveMenu(Person* Player1, Person* Player2)
 	}
 }
 
-void ConsoleInterface::TakeMenu(Person*, Person*)
+void ConsoleInterface::TakeMenu(Person* Player1, Person* Player2)
 {
-
+	while (true)
+	{
+		CLS;
+		this->LookInventory(Player2->get_inventory());
+		std::cout << "999 - Exit" << std::endl << "Which item to take ? : ";
+		int n;
+		std::cin >> n;
+		if (n == 999) return;
+		Player1->take_to_inventory(Player2->get_inventory()->remove(n));
+	}
 }
 
 void ConsoleInterface::TradeMenu(Person* Player1, Person* Player2)
@@ -103,7 +113,18 @@ void ConsoleInterface::SaveGameMenu()
 
 void ConsoleInterface::LoadGameMenu()
 {
+	std::string loadgamefilestring;
 
+	std::ifstream loadgamefile("savegame.txt");
+	if (loadgamefile.is_open())
+	{
+		while (std::getline(loadgamefile, loadgamefilestring))
+		{
+			std::cout << loadgamefilestring << std::endl;
+		}
+	}
+	loadgamefile.close();
+	PAUSE;
 }
 
 void ConsoleInterface::TestGameMenu_v0_1(Person* Player1, Person* Player2)
@@ -118,6 +139,7 @@ void ConsoleInterface::TestGameMenu_v0_1(Person* Player1, Person* Player2)
 			<< "3 - Look in inventory" << std::endl
 			<< "4 - Save game" << std::endl
 			<< "5 - Load game" << std::endl
+			<< "6 - Load Script" << std::endl
 			<< "0 - Exit game" << std::endl;
 		int i;
 		std::cin >> i;
@@ -143,6 +165,12 @@ void ConsoleInterface::TestGameMenu_v0_1(Person* Player1, Person* Player2)
 		else if (i == 5)
 		{
 			this->LoadGameMenu();
+		}
+		else if (i == 6)
+		{
+			ScriptReaderInterface* SRI = new ScriptReaderInterface();
+			SRI->ScriptReaderMethod(Player1);
+			PAUSE;
 		}
 		else if (i == 0)
 		{
